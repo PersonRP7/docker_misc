@@ -1,0 +1,35 @@
+version: '3.3'
+services:
+  web:
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    container_name: php73_composer
+    depends_on:
+      - db
+    volumes:
+      - ./php:/var/www/html
+    ports:
+      - 5000:80
+    networks:
+      - php_composer
+  db:
+    container_name: mysql8
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    volumes:
+      - composer_db_data:/var/lib/mysql
+    networks:
+      - php_composer
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: composer_database
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - 6033:3306
+networks:
+  php_composer:
+volumes:
+  composer_db_data:
