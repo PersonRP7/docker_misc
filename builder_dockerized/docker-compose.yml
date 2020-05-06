@@ -1,0 +1,8 @@
+version: '3.7'
+services: 
+    station:
+        container_name: dockerfile_builder
+        build: ./python
+        entrypoint: ["tail", "-f", "/dev/null"]
+        volumes: 
+            - ./station:/home/station
