@@ -3,3 +3,4 @@ py_dockerfile_builder
 .bash_history
 .python_history
 __pycache__
+network
